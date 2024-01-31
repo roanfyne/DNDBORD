@@ -169,6 +169,55 @@ export const GROUPS = {
  */
 export const SOUNDS = [
   // AMBIENT
+  { title: 'adventure-intro', groupName: GROUP_NAMES.TRAVELLING, iconHtml: '🎵', color: null, loopable: true, soundEntries: ['./sounds/music/adventure-intro.ogg',], },
+  { title: 'Tropfsteinhöhle', groupName: GROUP_NAMES.NATURE, iconHtml: '⛰', color: null, loopable: true, soundEntries: ['./sounds/ambient/dripping-cave.ogg',], },
+  { title: 'Stadt (abends)', groupName: GROUP_NAMES.TOWN, iconHtml: '🌆', color: null, loopable: true, soundEntries: ['./sounds/ambient/evening-town.ogg',], },
+  { title: 'Wald (tagsüber)', groupName: GROUP_NAMES.NATURE, iconHtml: '🌳', color: null, loopable: true, soundEntries: ['./sounds/ambient/forest-daytime.ogg',], },
+  { title: 'Reiten', groupName: GROUP_NAMES.TRAVELLING, iconHtml: '🐎', color: null, loopable: true, soundEntries: ['./sounds/ambient/horseback-travelling.ogg',], },
+  { title: 'Nachtlager', groupName: GROUP_NAMES.TRAVELLING, iconHtml: '🏕', color: null, loopable: true, soundEntries: ['./sounds/ambient/night-camp.ogg',], },
+  { title: 'Fluss (schnell)', groupName: GROUP_NAMES.NATURE, iconHtml: '🏞', color: null, loopable: true, soundEntries: ['./sounds/ambient/rapid-river.ogg',], },
+  { title: 'Gewitter', groupName: GROUP_NAMES.WEATHER, iconHtml: '🌩', color: null, loopable: true, soundEntries: ['./sounds/ambient/thunderstorm.ogg',], },
+  { title: 'Regen und Sturm', groupName: GROUP_NAMES.WEATHER, iconHtml: '🌩', color: null, loopable: true, soundEntries: ['./sounds/ambient/rain-and-storm.ogg',], },
+  { title: 'Stadtplatz (tagsüber)', groupName: GROUP_NAMES.TOWN, iconHtml: '🏘', color: null, loopable: true, soundEntries: ['./sounds/ambient/town-square-daytime.ogg',], },
+  { title: 'Marktplatz (klein)', groupName: GROUP_NAMES.TOWN, iconHtml: '💰', color: null, loopable: true, soundEntries: ['./sounds/ambient/small-marketplace.ogg',], },
+  {
+    title: 'Taverne (mit Musik)',
+    groupName: GROUP_NAMES.TOWN,
+    iconHtml: '🍺',
+    color: {
+      header: {
+        bg: COLOR.orange,
+        text: COLOR.black,
+      },
+      border: COLOR.orange,
+      body: {
+        bg: COLOR.white,
+        text: COLOR.black
+      },
+    },
+    loopable: true,
+    soundEntries: ['./sounds/ambient/tavern-music.ogg',],
+  },
+  {
+    title: 'Taverne (zwielichtig)',
+    groupName: GROUP_NAMES.TOWN,
+    iconHtml: '🍺',
+    color: {
+      header: {
+        bg: COLOR.orange,
+        text: COLOR.black,
+      },
+      border: COLOR.orange,
+      body: {
+        bg: COLOR.white,
+        text: COLOR.black
+      },
+    },
+    loopable: true,
+    soundEntries: ['./sounds/ambient/tavern-shady.ogg',],
+  },
+  { title: 'Dorf (Wald)', groupName: GROUP_NAMES.TOWN, iconHtml: '🏘', color: null, loopable: true, soundEntries: ['./sounds/ambient/woodland-village.ogg',], },
+  { title: 'Dorf (Grasland)', groupName: GROUP_NAMES.TOWN, iconHtml: '🏘', color: null, loopable: true, soundEntries: ['./sounds/ambient/village-grassland.ogg',], },
   {
     title: 'Hafen',
     groupName: GROUP_NAMES.TOWN,
@@ -189,19 +238,9 @@ export const SOUNDS = [
       './sounds/ambient/docks.ogg',
     ],
   },
-  { title: 'Tropfsteinhöhle', groupName: GROUP_NAMES.NATURE, iconHtml: '⛰', color: null, loopable: true, soundEntries: ['./sounds/ambient/dripping-cave.ogg',], },
-  { title: 'Stadt (abends)', groupName: GROUP_NAMES.TOWN, iconHtml: '🌆', color: null, loopable: true, soundEntries: ['./sounds/ambient/evening-town.ogg',], },
-  { title: 'Wald (tagsüber)', groupName: GROUP_NAMES.NATURE, iconHtml: '🌳', color: null, loopable: true, soundEntries: ['./sounds/ambient/forest-daytime.ogg',], },
-  { title: 'Reiten', groupName: GROUP_NAMES.TRAVELLING, iconHtml: '🐎', color: null, loopable: true, soundEntries: ['./sounds/ambient/horseback-travelling.ogg',], },
-  { title: 'Nachtlager', groupName: GROUP_NAMES.TRAVELLING, iconHtml: '🏕', color: null, loopable: true, soundEntries: ['./sounds/ambient/night-camp.ogg',], },
-  { title: 'Fluss (schnell)', groupName: GROUP_NAMES.NATURE, iconHtml: '🏞', color: null, loopable: true, soundEntries: ['./sounds/ambient/rapid-river.ogg',], },
-  { title: 'Marktplatz (klein)', groupName: GROUP_NAMES.TOWN, iconHtml: '💰', color: null, loopable: true, soundEntries: ['./sounds/ambient/small-marketplace.ogg',], },
-  { title: 'Gewitter', groupName: GROUP_NAMES.WEATHER, iconHtml: '🌩', color: null, loopable: true, soundEntries: ['./sounds/ambient/thunderstorm.ogg',], },
-  { title: 'Stadtplatz (tagsüber)', groupName: GROUP_NAMES.TOWN, iconHtml: '🏘', color: null, loopable: true, soundEntries: ['./sounds/ambient/town-square-daytime.ogg',], },
-  { title: 'Dorf (Wald)', groupName: GROUP_NAMES.TOWN, iconHtml: '🏘', color: null, loopable: true, soundEntries: ['./sounds/ambient/woodland-village.ogg',], },
   // MUSIC
-  { title: 'darkest-dungeon-the-cove-battle', groupName: GROUP_NAMES.COMBAT, iconHtml: null, color: null, loopable: true, soundEntries: ['./sounds/music/darkest-dungeon-the-cove-battle.ogg',], },
-  { title: 'skyrim-ost-blood-and-steel', groupName: GROUP_NAMES.COMBAT, iconHtml: null, color: null, loopable: true, soundEntries: ['./sounds/music/skyrim-ost-blood-and-steel.ogg',], },
+  { title: 'darkest-dungeon-the-cove-battle', groupName: GROUP_NAMES.COMBAT, iconHtml: '🎵', color: null, loopable: true, soundEntries: ['./sounds/music/darkest-dungeon-the-cove-battle.ogg',], },
+  { title: 'skyrim-ost-blood-and-steel', groupName: GROUP_NAMES.COMBAT, iconHtml: '🎵', color: null, loopable: true, soundEntries: ['./sounds/music/skyrim-ost-blood-and-steel.ogg',], },
   // EFFECTS
   { title: 'Schlag', groupName: GROUP_NAMES.COMBAT, iconHtml: '👊', color: null, loopable: false, soundEntries: [
       './sounds/effects/dirt-slam-1.ogg',
@@ -222,6 +261,13 @@ export const SOUNDS = [
     './sounds/effects/arrow-loose-and-hit-5.ogg',
     './sounds/effects/arrow-loose-and-hit-6.ogg',
     './sounds/effects/arrow-loose-and-hit-7.ogg',
+  ], },
+  { title: 'Kampfschrei', groupName: GROUP_NAMES.COMBAT, iconHtml: '🗯', color: null, loopable: false, soundEntries: [
+      './sounds/effects/male-attack-cry-1.ogg',
+      './sounds/effects/male-attack-cry-2.ogg',
+    ], },
+  { title: 'Vikingerhorn', groupName: GROUP_NAMES.COMBAT, iconHtml: '📯', color: null, loopable: false, soundEntries: [
+      './sounds/effects/viking-horn.ogg',
   ], },
   { title: 'Drachenbiss', groupName: GROUP_NAMES.COMBAT, iconHtml: '🐲', color: null, loopable: false, soundEntries: [
       './sounds/effects/dragon-bite-1.ogg',

@@ -182,7 +182,7 @@
                         </div>
 
                         <div class="my-1 d-flex flex-row justify-content-between">
-                          <button class="audio btn btn-sm btn-outline-dark" @click="fadeIn(groupIndex, soundIndex)">
+                          <button class="audio btn btn-sm btn-outline-dark" @click="fadeIn(groupIndex, soundIndex)" title="fade in">
                             <i class="fade-in-icon"></i>
                           </button>
                           <button class="audio btn btn-sm btn-outline-dark" @click="adjustVolume(groupIndex, soundIndex, -0.1)" title="-10%">
@@ -194,7 +194,7 @@
                           <button class="audio btn btn-sm btn-outline-dark" @click="adjustVolume(groupIndex, soundIndex, 0.1)" title="+10%">
                             <i class="fa fa-volume-up"></i>
                           </button>
-                          <button class="audio btn btn-sm btn-outline-dark" @click="fadeOut(groupIndex, soundIndex)">
+                          <button class="audio btn btn-sm btn-outline-dark" @click="fadeOut(groupIndex, soundIndex)" title="fade out">
                             <i class="fade-out-icon"></i>
                           </button>
                         </div>
@@ -319,7 +319,7 @@
           title: sound.title,
           groupName: sound.groupName,
           iconHtml: sound.iconHtml,
-          color: null,
+          color: sound.color ? sound.color : null,
           collapsed: true,
           loopable: sound.soundEntries.length > 1 ? false : sound.loopable,
           soundEntries: sound.soundEntries.map((url) => ({
@@ -359,6 +359,8 @@
 
           audioElement.volume = 0;
           audioElement.play();
+          soundEntry.isPlaying = true;
+
           audioElement.fadeInInterval = setInterval(() => {
             if (audioElement.volume >= 1) {
               clearInterval(audioElement.fadeInInterval);
@@ -390,6 +392,7 @@
               clearInterval(audioElement.fadeOutInterval);
               audioElement.pause();
               audioElement.currentTime = 0;
+              soundEntry.isPlaying = false;
 
               return;
             }
@@ -439,10 +442,11 @@
           updateProgress(audioElement, soundEntry);
         } else {
           audioElement.play();
+          audioElement.volume = 0.5;
           groups.value[groupIndex].sounds[soundIndex].soundEntries[soundEntryIndex].isPlaying = true;
           audioElement.progressInterval = setInterval(() => {
             updateProgress(audioElement, soundEntry);
-          }, 1000);
+          }, 100);
         }
       };
 
