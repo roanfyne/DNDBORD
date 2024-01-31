@@ -23,8 +23,8 @@
       border-radius: 0 !important;
     }
     .audio.btn {
-      //width: 38px;
-      //height: 38px;
+      width: 36px;
+      height: 36px;
     }
     .fade-in-icon {
       position: relative;
@@ -65,6 +65,9 @@
       min-width: 234px !important;
       max-width: 255px !important;
     }
+    .progress {
+      min-width: 130px;
+    }
   </style>
 </head>
 <body>
@@ -85,13 +88,17 @@
                 class="accordion-button"
                 :class="group.collapsed ? 'collapsed' : ''"
                 type="button"
-                @click="group.collapsed = !group.collapsed"
+                @click="anySoundIsPlaying(groupIndex) ? group.collapsed = group.collapsed : group.collapsed = !group.collapsed"
+                :disabled="anySoundIsPlaying(groupIndex)"
               >
                 <span class="me-2" v-html="group.iconHtml"></span>
                 <strong>{{ group.title }}</strong>
               </button>
             </h2>
-            <div id="collapseOne" class="accordion-collapse collapse" :class="group.collapsed ? '' : 'show'">
+            <div
+              class="accordion-collapse collapse"
+              :class="anySoundIsPlaying(groupIndex) ? 'show' : (group.collapsed ? '' : 'show')"
+            >
               <div class="accordion-body">
                 <div class="row row-cols-1 row-cols-md-2 g-4">
                   <div
@@ -116,20 +123,31 @@
                           <div v-if="sound.iconHtml" v-html="sound.iconHtml"></div>
                           {{ sound.title }}
                         </div>
-                        <div>
+                        <div class="d-flex flex-row justify-content-end" style="min-width: 76px">
                           <button
                             v-if="sound.loopable"
                             type="button"
-                            class="audio btn btn-sm"
+                            class="audio btn btn-sm me-1"
                             :class="sound.soundEntries[0]?.loop ? 'btn-dark' : 'btn-outline-dark'"
                             @click="toggleLoop(groupIndex, soundIndex, 0)"
                             title="Loop"
                           >
                             <i class="fa fa-refresh"></i>
                           </button>
+                          <button
+                            type="button"
+                            class="audio btn btn-sm btn-outline-dark"
+                            @click="anySoundEntryIsPlaying(groupIndex, soundIndex) ? sound.collapsed = sound.collapsed : sound.collapsed = !sound.collapsed"
+                            :disabled="anySoundEntryIsPlaying(groupIndex, soundIndex)"
+                          >
+                            <i class="fa" :class="sound.collapsed ? 'fa-chevron-down' : 'fa-chevron-up'"></i>
+                          </button>
                         </div>
                       </div>
-                      <div class="card-body p-1">
+                      <div
+                        class="card-body p-1"
+                        v-if="anySoundEntryIsPlaying(groupIndex, soundIndex) ? true : !sound.collapsed"
+                      >
                         <div v-for="(soundEntry, soundEntryIndex) of sound.soundEntries" :key="soundEntryIndex">
                           <audio
                             ref="audio"
@@ -147,7 +165,7 @@
                               <i class="fa" :class="soundEntry.isPlaying ? 'fa-pause' : 'fa-play'"></i>
                             </button>
 
-                            <div class="progress w-100 mx-2">
+                            <div class="progress mx-2">
                               <div
                                 class="progress-bar progress-bar-striped progress-bar-animated"
                                 :style="{ width: soundEntry.progress + '%' }"
@@ -302,6 +320,7 @@
           groupName: sound.groupName,
           iconHtml: sound.iconHtml,
           color: null,
+          collapsed: true,
           loopable: sound.soundEntries.length > 1 ? false : sound.loopable,
           soundEntries: sound.soundEntries.map((url) => ({
             url,
@@ -472,6 +491,25 @@
           !groups.value[groupIndex].sounds[soundIndex].soundEntries[soundEntryIndex].loop;
       };
 
+      const anySoundIsPlaying = (groupIndex) => {
+        const sounds = groups.value[groupIndex].sounds;
+        for (const sound of sounds) {
+          for (const soundEntry of sound.soundEntries) {
+            if (soundEntry.isPlaying) {
+              return true;
+            }
+          }
+        }
+
+        return false;
+      }
+
+      const anySoundEntryIsPlaying = (groupIndex, soundIndex) => {
+        return groups.value[groupIndex].sounds[soundIndex].soundEntries.filter(
+          (soundEntry) => !!soundEntry.isPlaying
+        ).length > 0;
+      }
+
       return {
         pagetitle,
         setPagetitle,
@@ -485,7 +523,9 @@
         playPause,
         stop,
         updateProgress,
-        toggleLoop
+        toggleLoop,
+        anySoundIsPlaying,
+        anySoundEntryIsPlaying,
       };
     }
   }).mount('#app');
