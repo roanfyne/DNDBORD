@@ -1,110 +1,128 @@
-# Simple Soundboard
+# simple-soundboard
 
-Simple Soundboard is just that.  It is written as just an HTML page to play looping ambient sounds, looping music, and instantaneous sound effects.  It is just a web page that can be loaded off of the file system (though can be statically hosted if desired).
+This repository contains a Vue 3 application utilizing Bootstrap 5 and FontAwesome 4.7 
+for displaying a simple soundboard. It provides an interface for playing configured audio 
+sounds grouped into categories. 
 
-I wrote it for my Dungeons and Dragons game when I couldn't find a simple and free soundboard.  Your browser is fully capable of mixing sounds and display a user interface.  It's also pervasive to boot so it made sense to just make it a web page.
+The project started off by editing the Project 
+[simple-soundboard](https://github.com/vietjtnguyen/simple-soundboard) by 
+[Viet T. Nguyen](https://github.com/vietjtnguyen).  
+Many thanks!
 
-The example in this repository is statically hosted to play with: <https://vietthe.dev/simple-soundboard/v2.0/soundboard.html>
+I edited the project to my own needs: i wanted it to be mobile friendly, colorful and customizable
+for being able to also play on-shot pen & papers on the go.
 
-# Usage
+**Demo:** https://fpetruschke.github.io/simple-soundboard
 
-Open up [`soundboard.html`](./soundboard.html) in your favorite browser.  I've tested it mostly with Firefox on Linux (Ubuntu), Firefox on Mac OS X, and Chrome on Mac OS X.
+## Contributing
+I unfortunately won't have much time to maintain, expand, and care for this project,
+so I will either not respond at all or only very late to issues or pull requests.
+Please feel free to download or fork this repository and customize it to your own needs.
 
-*The project is **not** optimized for use on mobile devices.*
+## Features
 
-![](screenshot2.png)
+- Integration of Vue 3, Bootstrap 5, and FontAwesome 4.7.
+- Dynamic rendering of audio sound groups with collapsible sections.
+- Ability to play, pause, stop, adjust volume, mute, and loop audio sounds.
+- Smooth fading in and out of audio sounds.
+- Customizable configuration for sound groups and sounds.
 
-The first screen you see is a list of all the soundboards defined in [`definitions.js`](./definitions.js).  Clicking on a soundboard link takes you to it.  The URL for a specific soundboard is simply the soundboard name in the query string. For example, you can go to the `combat` soundboard by appending `?combat` to the `soundboard.html` URL.  Multiple soundboards can be opened up in separate tabs and/or windows.  This lets you organize your soundboards into orthogonal concerns allowing you to compose them (like "traveling" and "combat").
+## Installation
 
-![](screenshot.png)
+To run this application locally, follow these steps:
 
-Each soundboard is a grid of sounds and/or sound groups.  Each sound is placed into its own block.  The block shows the audio widget(s) for the sound(s) which allows you to play/pause, scrub time, and change volume. Beneath the audio widgets are numerous convenience buttons.
+1. Clone this repository to your local machine.
+2. Navigate to the project directory.
+3. Edit the `config.js` to your needs.
+4. Open the `index.html` in a web browser.
 
-- The first button contains the name of the sound or sound group.  It can be used to quick-scrub to the beginning of the sound and play the sound.
-- Next to it are the fade-in ("f in") and fade-out ("f out") buttons.
-  - The fade-in button will quick-scrub to the beginning of the sound, set the volume to zero, play the sound, and increase the volume to 100% over four seconds.
-  - The fade-out button simply transitions the volume to 0% over four seconds and stops the sound when the volume hits 0%.
-- The row of buttons underneath are quick controls for changing volume.
-  - The "-10%" and "+10%" buttons will decrement and increment volume by 10% points respectively.
-  - The "0%", "50%", and "100%" buttons will directly set the volume to the specified level.
-- Beneath all of the buttons there may be a loop checkbox.  This controls whether the sound loops or not.  By default sounds that are 50 seconds or longer are marked for looping.  Sound groups cannot be looped and thus do not have a loop checkbox.
+## Sounds
 
-## Customizing
+To demonstrate the soundboard, I've taken the sounds from 
+[simple-soundboard](https://github.com/vietjtnguyen/simple-soundboard).
+Please have a look at the [audio-chapter](https://github.com/vietjtnguyen/simple-soundboard#audio) there.
 
-Edit [`definitions.js`](./definitions.js) to change your soundboards.  The `soundboards` global variable defined by this file will be used to define your soundboards.  The variable should be a hash object where the key is the name of the soundboard and the value is a list of sounds and/or sound group definitions.
+## Configuration
 
-If a sound is specified as a string it is assumed to be the URL of the sound file.  In order to support loading the soundboard from the filesystem the URLs should be written as relative to where `soundboard.html` is on the filesystem.  Sounds that are longer than 60 seconds are automatically marked as looping, but you can simply change the loop checkbox to change whether that sound clip loops.
+### Customizing Colors
 
-If the sound is specified as a hash object then two keys are expected: `name` and `audio`.  `name` should just be a string for the text in the play button.  `audio` should be an array of sound URLs associated with this one sound block.  The object definition allows specifying multiple sounds to be played randomly from one button.  Which sound is played is sampled randomly without replacement.  This means each sound will be played once before any sound is repeated.  These grouped sounds cannot be looped.
+In the `config.js` file, you can customize color mappings for different elements. 
+The `COLOR` object provides a mapping of color names to hex codes.
+The defined colors are taken from Bootstrap5.
 
-### Example
+```javascript
+const COLOR = {
+  blue: '#0d6efd',
+  indigo: '#6610f2',
+  // ... (other color mappings)
+};
+```
 
-```js
-var soundboards = {}
-soundboards.combat = [
-  './relative/url/to/music.ogg',
+### Customizing Colors
+The `GROUP_NAMES` object in `config.js` allows you to define names for different 
+sound groups. Each group is indexed by the string value - so do not use any
+special characters for that.
+
+```javascript
+const GROUP_NAMES = {
+  COMBAT: 'combat',
+  NATURE: 'nature',
+  TOWN: 'town',
+  WEATHER: 'weather',
+};
+```
+
+### Configuring Sound Groups
+The `GROUPS` object defines the properties of each sound group.
+Customize titles, icons, and colors for different groups.
+
+```javascript
+export const GROUPS = {
+  [GROUP_NAMES.COMBAT]: {
+    title: 'Kampf',
+    iconHtml: '⚔',
+    collapsed: true,
+    color: {
+      header: { bg: COLOR.red, text: COLOR.white },
+      border: COLOR.red,
+      body: { bg: COLOR.white, text: COLOR.black },
+    },
+  },
+  // ... (other sound groups)
+};
+```
+
+### Adding Custom Sounds
+The `SOUNDS` array in `config.js` contains the details of each sound, 
+including titles, group names, icons, colors, and file paths.
+
+```javascript
+export const SOUNDS = [
   {
-    'name': 'effect',
-    'audio': [
-      './relative/url/to/effect-1.ogg',
-      './relative/url/to/effect-2.ogg',
-      './relative/url/to/effect-3.ogg',
+    title: 'Hafen',
+    groupName: GROUP_NAMES.TOWN,
+    iconHtml: '⚓',
+    color: {
+      header: { 
+        bg: COLOR.blue,
+        text: COLOR.white,
+      },
+      border: COLOR.blue,
+      body: { 
+        bg: COLOR.white,
+        text: COLOR.black,
+      },
+    },
+    loopable: true,
+    soundEntries: [
+      './sounds/docks.ogg',
     ],
   },
+  // ... (other custom sounds)
 ];
 ```
 
-# Attribution
+Feel free to modify these configurations to suit your preferences.
 
-The project started off by editing [ryandoherty/ClouserW-Soundboard](https://github.com/ryandoherty/ClouserW-Soundboard).
-
-## Audio
-
-To demonstrate the soundboard there are some example audio clips in the project that need to be attributed.  These audio clips came from YouTube; their respective source URLs are listed below.  The clips were chopped up and converted to OGG using [Audacity](https://www.audacityteam.org/).  Some were manually edited to loop cleanly.
-
-- `./ambient/docks.ogg`: https://www.youtube.com/watch?v=35H1tJ-VUQ8
-- `./ambient/dripping-cave.ogg`: https://www.youtube.com/watch?v=3Hwr_BaekgM
-- `./ambient/evening-town.ogg`: https://www.youtube.com/watch?v=bSbYpFMNxLI
-- `./ambient/forest-daytime.ogg`: https://www.youtube.com/watch?v=6Em9tLXbhfo
-- `./ambient/horseback-travelling.ogg`: https://www.youtube.com/watch?v=PIvykxZ0ppQ
-- `./ambient/night-camp.ogg`: https://www.youtube.com/watch?v=7KFoj-SOfHs
-- `./ambient/rapid-river.ogg`: https://www.youtube.com/watch?v=KRg0vHytUzg
-- `./ambient/small-marketplace.ogg`: https://www.youtube.com/watch?v=x2UulCWGess
-- `./ambient/thunderstorm.ogg`: https://www.youtube.com/watch?v=eqabnkMmqyM
-- `./ambient/town-square-daytime.ogg`: https://www.youtube.com/watch?v=NeOg8iCFfTA
-- `./ambient/woodland-village.ogg`: https://www.youtube.com/watch?v=-IEAfnRneP4
-- `./effects/arrow-loose-and-hit-*.ogg`: https://www.youtube.com/watch?v=e8VxBmZqFkY
-- `./effects/dirt-slam-*.ogg`: https://www.youtube.com/watch?v=WOWav94syLc
-- `./effects/dragon-bite-*.ogg`: https://www.youtube.com/watch?v=WOWav94syLc
-- `./effects/ooze-*.ogg`: https://www.youtube.com/watch?v=XxbTFBkNfgQ
-- `./effects/owlbear-roar-*.ogg`: https://www.youtube.com/watch?v=nqFjsnoDb2g
-- `./effects/slam-attack-*.ogg`: https://www.youtube.com/watch?v=WOWav94syLc
-- `./effects/swimming-*.ogg`: https://www.youtube.com/watch?v=f4JImUZwTwo
-- `./effects/sword-clash-*.ogg`: https://www.youtube.com/watch?v=f3mktVQ-n_c
-- `./effects/thunder-clap-1.ogg`: https://www.youtube.com/watch?v=ZHeLUVDYLIg
-- `./effects/thunder-clap-2.ogg`: https://www.youtube.com/watch?v=QZpgHrKXooc
-- `./effects/thunder-clap-3.ogg`: https://www.youtube.com/watch?v=QZpgHrKXooc
-- `./effects/thunder-clap-4.ogg`: https://www.youtube.com/watch?v=QZpgHrKXooc
-- `./effects/wave-crash-*.ogg`: https://www.youtube.com/watch?v=xvNNTc6ZPtQ
-- `./music/darkest-dungeon-the-cove-battle.ogg`: https://www.youtube.com/watch?v=tluwkXgr93Y
-- `./music/skyrim-ost-blood-and-steel.ogg`: https://www.youtube.com/watch?v=q_AUBic3NEo
-
-# Getting Sound Clips
-
-So far I've been finding clips and audio tracks on YouTube, grabbing them using [`youtube-dl`](https://github.com/ytdl-org/youtube-dl), and editing them using [Audacity](https://www.audacityteam.org/).  I've been doing this all on a Ubuntu machine. `youtube-dl` can be grabbed using `pip`.  Audacity can be installed from the Ubuntu package repository (`sudo apt install audacity`).
-
-# Contributing
-
-The interface is purposefully spartan.  Feel free to send me pull requests if you have nice styling or features.
-
-# License
-
-> The MIT License (MIT)
->
-> Copyright © 2019 Viet T. Nguyen
->
-> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
->
-> The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
->
-> THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+## License
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
