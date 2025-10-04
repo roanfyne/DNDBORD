@@ -115,6 +115,22 @@ export const GROUPS = {
       },
     }
   },
+  [GROUP_NAMES.INTRO]: {
+    title: 'Music That Can Be Used For Intros and Stuff',
+    iconHtml: '😜',
+    collapsed: true,
+    color: {
+      header: {
+        bg: COLOR.green,
+        text: COLOR.white,
+      },
+      border: COLOR.green,
+      body: {
+        bg: COLOR.white,
+        text: COLOR.black,
+      },
+    }
+  },
   [GROUP_NAMES.WEATHER]: {
     title: 'Weather',
     iconHtml: '🌦',
@@ -180,6 +196,7 @@ export const SOUNDS = [
   { title: 'Thunderstorm', groupName: GROUP_NAMES.WEATHER, iconHtml: '🌩', color: null, loopable: true, soundEntries: ['./sounds/ambient/rain-and-storm.ogg',], },
   { title: 'Rain and Storm', groupName: GROUP_NAMES.TOWN, iconHtml: '🏘', color: null, loopable: true, soundEntries: ['./sounds/ambient/town-square-daytime.ogg',], },
   { title: 'Marketplace', groupName: GROUP_NAMES.TOWN, iconHtml: '💰', color: null, loopable: true, soundEntries: ['./sounds/ambient/small-marketplace.ogg',], },
+  { title: 'This is Amazing', groupName: GROUP_NAMES.INTRO, iconHtml: '💰', color: null, loopable: true, soundEntries: ['./sounds/music/INTRO.mp3',], },
   {
     title: 'Tavern',
     groupName: GROUP_NAMES.TOWN,
