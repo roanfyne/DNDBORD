@@ -197,7 +197,7 @@ export const SOUNDS = [
   { title: 'Rain and Storm', groupName: GROUP_NAMES.TOWN, iconHtml: '🏘', color: null, loopable: true, soundEntries: ['./sounds/ambient/town-square-daytime.ogg',], },
   { title: 'Marketplace', groupName: GROUP_NAMES.TOWN, iconHtml: '💰', color: null, loopable: true, soundEntries: ['./sounds/ambient/small-marketplace.ogg',], },
   { title: 'This is Amazing', groupName: GROUP_NAMES.INTRO, iconHtml: '💰', color: null, loopable: true, soundEntries: ['./sounds/music/INTRO.mp3',], },
-  { title: 'Waltz Of The Tornado', groupName: GROUP_NAMES.INTRO, iconHtml: '🌪', color: null, loopable: true, soundEntries: ['.sounds/music/wiwiwi.mp3',], },
+  { title: 'Waltz Of The Tornado', groupName: GROUP_NAMES.INTRO, iconHtml: '🌪', color: null, loopable: true, soundEntries: ['./sounds/music/wiwiwi.mp3',], },
   {
     title: 'Tavern',
     groupName: GROUP_NAMES.TOWN,
