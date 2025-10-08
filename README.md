@@ -2,7 +2,7 @@
 
 This repository contains a Vue 3 application utilizing Bootstrap 5 and FontAwesome 4.7 
 for displaying a simple soundboard. It provides an interface for playing configured audio 
-sounds grouped into categories. 
+sounds grouped into categories. I plan to add more sounds to it than the previous version. Check out the version I forked it from.
 
 **Demo:** [https://roanfyne.github.io/DNDBORD/]
 
