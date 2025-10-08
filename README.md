@@ -4,19 +4,11 @@ This repository contains a Vue 3 application utilizing Bootstrap 5 and FontAweso
 for displaying a simple soundboard. It provides an interface for playing configured audio 
 sounds grouped into categories. 
 
-The project started off by editing the Project 
-[simple-soundboard](https://github.com/vietjtnguyen/simple-soundboard) by 
-[Viet T. Nguyen](https://github.com/vietjtnguyen).  
-Many thanks!
-
-I edited the project to my own needs: i wanted it to be mobile friendly, colorful and customizable
-for being able to also play on-shot pen & papers on the go.
-
-**Demo:** https://fpetruschke.github.io/simple-soundboard
+**Demo:** [https://roanfyne.github.io/DNDBORD/]
 
 ## Contributing
-I unfortunately won't have much time to maintain, expand, and care for this project,
-so I will either not respond at all or only very late to issues or pull requests.
+I fortunately have much time to maintain, expand, and care for this project,
+so I will respond to issues or pull requests.
 Please feel free to download or fork this repository and customize it to your own needs.
 
 ## Features
@@ -124,5 +116,3 @@ export const SOUNDS = [
 
 Feel free to modify these configurations to suit your preferences.
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
